@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mala vs Moja — Beli Tiket</title>
+  <meta name="description" content="Website resmi pembelian tiket pertandingan tinju Mala vs Moja." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0b1220;--card:#121a2b;--ring:#ff5a49;--aqua:#3fd0c9;--sand:#f3e7ce}
+    html{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif}
+    .grid-bg{background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,.06) 1px,transparent 0);background-size:24px 24px}
+    .shine{background:linear-gradient(110deg,rgba(255,255,255,.05) 0%,rgba(255,255,255,.2) 15%,rgba(255,255,255,.05) 30%);background-size:200% 100%;animation:shine 6s linear infinite}
+    @keyframes shine{to{background-position-x:-200%}}
+  </style>
+</head>
+<body class="bg-[var(--bg)] text-white">
+
+  <!-- Top bar -->
+  <header class="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/5">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3">
+        <!-- Gloves Icon -->
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="drop-shadow"><path d="M8 3c2 0 3.5 1.6 3.5 3.5S10 10 8 10H6.2C4.4 10 3 8.6 3 6.8 3 4.7 4.7 3 6.8 3H8Z" fill="var(--ring)"/><path d="M16 3c-2 0-3.5 1.6-3.5 3.5S14 10 16 10h1.8c1.8 0 3.2-1.4 3.2-3.2C21 4.7 19.3 3 17.2 3H16Z" fill="var(--aqua)"/><rect x="2.5" y="10" width="8" height="6" rx="2" fill="#ffb4ac"/><rect x="13.5" y="10" width="8" height="6" rx="2" fill="#9ae9e4"/></svg>
+        <span class="font-extrabold tracking-tight">Mala<span class="text-[var(--ring)]">VS</span>Moja</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="#tiket" class="hover:text-[var(--aqua)]">Tiket</a>
+        <a href="#venue" class="hover:text-[var(--aqua)]">Venue</a>
+        <a href="#faq" class="hover:text-[var(--aqua)]">FAQ</a>
+      </nav>
+      <a href="#beli" class="inline-flex items-center rounded-xl bg-[var(--ring)] px-4 py-2 text-sm font-semibold shadow hover:opacity-90">Beli Tiket</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 grid-bg"></div>
+    <div class="absolute inset-x-0 -top-24 h-[420px] blur-[120px] opacity-30 bg-gradient-to-r from-[var(--ring)] via-purple-500 to-[var(--aqua)]"></div>
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-14 pb-10 lg:pt-20 lg:pb-16 relative">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <p class="mb-3 inline-flex items-center gap-2 rounded-full bg-white/5 ring-1 ring-white/10 px-3 py-1 text-xs">
+            <span class="w-2 h-2 rounded-full bg-[var(--ring)] animate-pulse"></span>
+            Main Event • Tinju</p>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
+            <span class="text-[var(--sand)]">Mala</span> vs <span class="text-[var(--aqua)]">Moja</span>
+          </h1>
+          <p class="mt-4 text-white/80 max-w-prose">Ini arena. Ini jawaban. Satu ring, satu kebenaran. Amankan kursi kamu sekarang.</p>
+          <div class="mt-6 flex flex-wrap items-center gap-4 text-sm text-white/80">
+            <div class="rounded-lg bg-white/5 ring-1 ring-white/10 px-3 py-2">Sabtu, 04 Sep 2025 • 19:30 WIB</div>
+            <div class="rounded-lg bg-white/5 ring-1 ring-white/10 px-3 py-2">Jakarta Fight Dome</div>
+            <div class="rounded-lg bg-white/5 ring-1 ring-white/10 px-3 py-2">Live + Onsite</div>
+          </div>
+          <div class="mt-8 flex flex-wrap items-center gap-3">
+            <button id="ctaBuy" class="rounded-xl bg-[var(--ring)] px-5 py-3 font-semibold hover:opacity-90 transition-opacity">Beli Tiket</button>
+            <button id="btnRobloxMap" class="rounded-xl ring-1 ring-[var(--aqua)] px-5 py-3 font-semibold text-[var(--aqua)] hover:bg-[var(--aqua)]/10 transition-colors">Buka Map Roblox</button>
+            <button id="btnDiscord" class="rounded-xl bg-[#5865F2] px-5 py-3 font-semibold hover:opacity-90 transition-opacity">Join Discord</button>
+          </div>
+          <div class="mt-6 text-sm text-white/70">Countdown: <span id="count" class="font-bold text-white"></span></div>
+        </div>
+        <!-- Poster -->
+        <div class="relative max-w-md mx-auto lg:mx-0">
+          <div class="rounded-3xl bg-[var(--card)] shadow-xl ring-1 ring-white/10 p-2 hover:scale-[1.02] transition-transform duration-300">
+            <img 
+              src="img/malavsmoja.png" 
+              alt="Poster pertandingan Mala vs Moja" 
+              class="w-full h-auto rounded-2xl"
+              loading="eager"
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ticket Section -->
+  <section id="tiket" class="relative py-14 lg:py-20">
+    <div class="absolute inset-x-0 -z-10 top-0 h-40 bg-gradient-to-b from-white/5 to-transparent"></div>
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-8 flex items-end justify-between">
+        <h2 class="text-2xl sm:text-3xl font-extrabold">Pilih Tiket</h2>
+        <p class="text-white/70 text-sm">Semua harga sudah termasuk pajak. Fee platform terlihat di checkout.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- GA -->
+        <article class="rounded-2xl bg-[var(--card)] ring-1 ring-white/10 p-6 flex flex-col">
+          <header class="mb-4">
+            <p class="text-xs text-white/60">General Admission</p>
+            <h3 class="text-xl font-bold">GA</h3>
+          </header>
+          <p class="text-3xl font-extrabold">Rp <span data-price="ga">250.000</span></p>
+          <ul class="mt-4 text-sm text-white/80 space-y-1">
+            <li>Standing area</li>
+            <li>Basic facilities</li>
+            <li>Event merchandise discount</li>
+          </ul>
+          <div class="mt-6 grid grid-cols-[1fr,auto] gap-3 items-center">
+            <label class="text-sm">Qty</label>
+            <input aria-label="GA qty" type="number" min="0" max="10" value="0" class="w-20 rounded-lg bg-white/5 ring-1 ring-white/10 px-3 py-2" data-qty="ga">
+          </div>
+        </article>
+
+        <!-- VIP -->
+        <article class="rounded-2xl bg-[var(--card)] ring-1 ring-white/10 p-6 flex flex-col">
+          <header class="mb-4">
+            <p class="text-xs text-white/60">Premium Experience</p>
+            <h3 class="text-xl font-bold">VIP</h3>
+          </header>
+          <p class="text-3xl font-extrabold">Rp <span data-price="vip">750.000</span></p>
+          <ul class="mt-4 text-sm text-white/80 space-y-1">
+            <li>Reserved seating</li>
+            <li>VIP lounge access</li>
+            <li>Complimentary drinks</li>
+          </ul>
+          <div class="mt-6 grid grid-cols-[1fr,auto] gap-3 items-center">
+            <label class="text-sm">Qty</label>
+            <input aria-label="VIP qty" type="number" min="0" max="10" value="0" class="w-20 rounded-lg bg-white/5 ring-1 ring-white/10 px-3 py-2" data-qty="vip">
+          </div>
+        </article>
+
+        <!-- SUPERVVIP -->
+        <article class="rounded-2xl bg-[var(--card)] ring-1 ring-white/10 p-6 flex flex-col">
+          <header class="mb-4">
+            <p class="text-xs text-white/60">All Access Max</p>
+            <h3 class="text-xl font-bold">SUPERVVIP</h3>
+          </header>
+          <p class="text-3xl font-extrabold">Rp <span data-price="svvip">1.500.000</span></p>
+          <ul class="mt-4 text-sm text-white/80 space-y-1">
+            <li>Kursi paling depan</li>
+            <li>Meet & greet + backstage</li>
+            <li>Merch eksklusif</li>
+          </ul>
+          <div class="mt-6 grid grid-cols-[1fr,auto] gap-3 items-center">
+            <label class="text-sm">Qty</label>
+            <input aria-label="SUPERVVIP qty" type="number" min="0" max="10" value="0" class="w-20 rounded-lg bg-white/5 ring-1 ring-white/10 px-3 py-2" data-qty="svvip">
+          </div>
+        </article>
+      </div>
+
+      <!-- Checkout Card -->
+      <div class="mt-8 grid lg:grid-cols-3 gap-6 items-start">
+        <div class="lg:col-span-2 rounded-2xl bg-[var(--card)] ring-1 ring-white/10 p-6">
+          <h3 class="text-lg font-bold mb-4">Ring Layout</h3>
+          <div class="aspect-[16/9] rounded-xl bg-white/5 grid place-items-center">
+            <!-- Simple seat map legend -->
+            <div class="flex items-center gap-6 text-sm">
+              <span class="inline-flex items-center gap-2"><span class="w-4 h-4 rounded bg-[#ffb4ac]"></span> GA</span>
+              <span class="inline-flex items-center gap-2"><span class="w-4 h-4 rounded bg-[#ffd166]"></span> VIP</span>
+              <span class="inline-flex items-center gap-2"><span class="w-4 h-4 rounded bg-[#9ae9e4]"></span> SUPERVVIP</span>
+            </div>
+          </div>
+        </div>
+        <aside class="rounded-2xl bg-[var(--card)] ring-1 ring-white/10 p-6" aria-labelledby="checkout">
+          <h3 id="checkout" class="text-lg font-bold">Checkout</h3>
+          <div class="mt-4 space-y-2 text-sm">
+            <div class="flex justify-between"><span>Subtotal</span><span id="subtotal">Rp 0</span></div>
+            <div class="flex justify-between"><span>Fee Platform (6%)</span><span id="fee">Rp 0</span></div>
+            <div class="flex justify-between font-semibold text-[var(--sand)]"><span>Total</span><span id="total">Rp 0</span></div>
+          </div>
+          <div class="mt-5 space-y-3">
+            <button id="payBtn" class="w-full rounded-xl bg-[var(--ring)] px-4 py-3 font-semibold disabled:opacity-50 transition-opacity" disabled>Beli & Dapatkan Receipt</button>
+            <p class="text-xs text-white/60">Tekan tombol untuk memunculkan receipt. Status: dibayar.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Venue -->
+  <section id="venue" class="py-14 lg:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-8 items-start">
+        <div class="rounded-2xl bg-[var(--card)] ring-1 ring-white/10 p-6">
+          <h3 class="text-lg font-bold mb-3">Lokasi</h3>
+          <p class="text-sm text-white/80 mb-4">Map Roblox resmi tersedia. Klik tombol di bawah untuk mengakses venue virtual.</p>
+          <div class="aspect-video rounded-xl bg-white/5 grid place-items-center text-white/80 text-sm text-center p-6">
+            <div>
+              <div class="mb-4">🎮 Virtual Venue di Roblox</div>
+              <div class="text-xs text-white/60 mb-4">Roblox tidak mendukung embed penuh di sini.<br>Klik tombol untuk buka map di app/web.</div>
+              <button id="btnRobloxVenue" class="inline-flex items-center rounded-xl bg-[var(--aqua)] text-black px-4 py-2 font-semibold hover:opacity-90 transition-opacity">
+                Buka Map Roblox
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="rounded-2xl bg-[var(--card)] ring-1 ring-white/10 p-6">
+          <h3 class="text-lg font-bold mb-3">Peraturan Singkat</h3>
+          <ul class="text-sm text-white/80 space-y-2 list-disc pl-5">
+            <li>e-Ticket & KTP wajib.</li>
+            <li>Tidak boleh bawa benda tajam, flare, atau drone.</li>
+            <li>Masuk venue mulai 18:00 WIB.</li>
+            <li>Anak < 12 tahun wajib pendamping.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Stream -->
+  <section class="py-14 lg:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl bg-[var(--card)] ring-1 ring-white/10 p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div>
+          <h3 class="text-lg font-bold">Live di Discord</h3>
+          <p class="text-sm text-white/80">Join server buat nonton bareng dan dapet kode redeem merch.</p>
+        </div>
+        <button id="btnDiscordLive" class="inline-flex items-center rounded-xl bg-[#5865F2] px-5 py-3 font-semibold shadow hover:opacity-90 transition-opacity">
+          Join Discord
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-14 lg:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h3 class="text-2xl font-extrabold mb-6">FAQ</h3>
+      <div class="divide-y divide-white/10 rounded-2xl bg-[var(--card)] ring-1 ring-white/10">
+        <details class="p-6" open>
+          <summary class="cursor-pointer font-semibold">Apakah ada e-ticket?</summary>
+          <p class="mt-2 text-sm text-white/80">Ya. Setelah bayar, e-ticket terkirim ke email.</p>
+        </details>
+        <details class="p-6">
+          <summary class="cursor-pointer font-semibold">Bisa refund?</summary>
+          <p class="mt-2 text-sm text-white/80">Refund mengikuti S&K promotor. Transfer nama kursi diizinkan.</p>
+        </details>
+        <details class="p-6">
+          <summary class="cursor-pointer font-semibold">Dress code?</summary>
+          <p class="mt-2 text-sm text-white/80">Bebas rapi. Bawa jaket, venue AC dingin.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <footer class="border-t border-white/10 py-8 text-center text-sm text-white/60">
+    © 2025 MalaVSmoja. Semua hak dilindungi.
+  </footer>
+
+  <!-- Modal Receipt -->
+  <div id="receipt" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+    <div class="relative mx-auto mt-10 w-[90%] max-w-md rounded-2xl bg-[var(--card)] ring-1 ring-white/10 shadow-2xl">
+      <div class="p-6 border-b border-white/10 flex items-center justify-between">
+        <h4 class="text-lg font-bold">🎫 Ticket Receipt</h4>
+        <button id="closeReceipt" class="px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">✕</button>
+      </div>
+      <div class="p-6">
+        <div class="text-center mb-6">
+          <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-500/20 mb-4">
+            <span class="text-2xl">✓</span>
+          </div>
+          <h5 class="text-xl font-bold text-green-400">Pembayaran Berhasil!</h5>
+          <p class="text-sm text-white/70">Tiket Anda telah dikonfirmasi</p>
+        </div>
+        
+        <div class="space-y-3 text-sm mb-6">
+          <div class="flex justify-between"><span class="text-white/70">Status</span><span class="font-semibold text-green-400">✓ Paid</span></div>
+          <div class="flex justify-between"><span class="text-white/70">Event</span><span class="font-semibold">Mala vs Moja</span></div>
+          <div class="flex justify-between"><span class="text-white/70">Tanggal</span><span>04 Sep 2025 • 19:30 WIB</span></div>
+          <div class="flex justify-between"><span class="text-white/70">Venue</span><span>Jakarta Fight Dome</span></div>
+          <div class="border-t border-white/10 pt-3 mt-3">
+            <div id="ticketDetails" class="space-y-2"></div>
+          </div>
+          <div class="flex justify-between font-semibold text-[var(--sand)] border-t border-white/10 pt-3">
+            <span>Total Bayar</span><span id="rcptTotal">Rp 0</span>
+          </div>
+          <div class="flex justify-between"><span class="text-white/70">Order ID</span><span id="rcptId" class="font-mono text-xs"></span></div>
+        </div>
+        
+        <div class="rounded-xl bg-white/5 p-6 text-center border-2 border-dashed border-white/20 mb-6">
+          <div class="text-6xl mb-2">📱</div>
+          <div class="text-xs text-white/60">QR Code E-Ticket</div>
+          <div class="text-xs text-white/40 mt-2">Tunjukkan di pintu masuk</div>
+        </div>
+      </div>
+      
+      <div class="p-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-end gap-3">
+        <button id="printReceipt" class="w-full sm:w-auto rounded-xl ring-1 ring-white/20 px-4 py-2 font-semibold hover:bg-white/5 transition-colors">🖨️ Print</button>
+        <button id="closeReceipt2" class="w-full sm:w-auto rounded-xl bg-[var(--ring)] px-4 py-2 font-semibold hover:opacity-90 transition-opacity">Selesai</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Configuration
+    const ROBLOX_MAP_URL = 'https://www.roblox.com/share?code=c4828e585e555d4e95364d9df85f2c3d&type=Server';
+    const DISCORD_URL = 'https://discord.gg/R5E7pTuU';
+    
+    // Countdown to event (WIB GMT+7). Target: 2025-09-13T19:30:00+07:00
+    const target = new Date('2025-09-13T19:30:00+07:00').getTime();
+    const countEl = document.getElementById('count');
+    const tickerInputs = document.querySelectorAll('[data-qty]');
+    const modal = document.getElementById('receipt');
+    
+    // Button elements
+    const btnBuyHero = document.getElementById('ctaBuy');
+    const btnRobloxMap = document.getElementById('btnRobloxMap');
+    const btnRobloxVenue = document.getElementById('btnRobloxVenue');
+    const btnDiscord = document.getElementById('btnDiscord');
+    const btnDiscordLive = document.getElementById('btnDiscordLive');
+    const btnClose1 = document.getElementById('closeReceipt');
+    const btnClose2 = document.getElementById('closeReceipt2');
+    const btnPrint = document.getElementById('printReceipt');
+
+    // Utility function for currency formatting
+    function rupiah(n){
+      return new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(n).replace(",00","");
+    }
+
+    // Ticket prices
+    const PRICES = { 
+      ga: 250000,
+      vip: 750000, 
+      svvip: 1500000 
+    };
+
+    const TICKET_NAMES = {
+      ga: 'General Admission',
+      vip: 'VIP',
+      svvip: 'SUPERVVIP'
+    };
+
+    // Update totals calculation
+    function updateTotals(){
+      let subtotal = 0;
+      const selectedTickets = [];
+      
+      tickerInputs.forEach(input => {
+        const key = input.dataset.qty;
+        const qty = +input.value || 0;
+        const price = PRICES[key] || 0;
+        const itemTotal = price * qty;
+        subtotal += itemTotal;
+        
+        if (qty > 0) {
+          selectedTickets.push({
+            type: key,
+            name: TICKET_NAMES[key],
+            qty: qty,
+            price: price,
+            total: itemTotal
+          });
+        }
+      });
+      
+      const fee = Math.round(subtotal * 0.06);
+      const total = subtotal + fee;
+      
+      document.getElementById('subtotal').textContent = rupiah(subtotal);
+      document.getElementById('fee').textContent = rupiah(fee);
+      document.getElementById('total').textContent = rupiah(total);
+      
+      const canPay = total > 0;
+      document.getElementById('payBtn').disabled = !canPay;
+      
+      // Store selected tickets for receipt
+      window.selectedTickets = selectedTickets;
+    }
+
+    // Event listeners for quantity inputs
+    tickerInputs.forEach(input => input.addEventListener('input', updateTotals));
+    updateTotals();
+
+    // Open receipt modal
+    function openReceipt(){
+      const totalText = document.getElementById('total').textContent;
+      const ticketDetailsEl = document.getElementById('ticketDetails');
+      
+      // Clear previous details
+      ticketDetailsEl.innerHTML = '';
+      
+      // Add ticket details
+      window.selectedTickets.forEach(ticket => {
+        const detailEl = document.createElement('div');
+        detailEl.className = 'flex justify-between';
+        detailEl.innerHTML = `
+          <span class="text-white/70">${ticket.name} (${ticket.qty}x)</span>
+          <span>${rupiah(ticket.total)}</span>
+        `;
+        ticketDetailsEl.appendChild(detailEl);
+      });
+      
+      document.getElementById('rcptTotal').textContent = totalText;
+      document.getElementById('rcptId').textContent = 'MJM-' + Math.random().toString(36).slice(2,8).toUpperCase();
+      
+      modal.classList.remove('hidden');
+    }
+
+    // Button event listeners
+    document.getElementById('payBtn').addEventListener('click', openReceipt);
+    
+    if(btnBuyHero){
+      btnBuyHero.addEventListener('click', () => {
+        document.getElementById('tiket').scrollIntoView({behavior:'smooth'});
+      });
+    }
+
+    // Roblox map buttons
+    if(btnRobloxMap){
+      btnRobloxMap.addEventListener('click', () => {
+        window.open(ROBLOX_MAP_URL, '_blank');
+      });
+    }
+    
+    if(btnRobloxVenue){
+      btnRobloxVenue.addEventListener('click', () => {
+        window.open(ROBLOX_MAP_URL, '_blank');
+      });
+    }
+
+    // Discord buttons
+    if(btnDiscord){
+      btnDiscord.addEventListener('click', () => {
+        window.open(DISCORD_URL, '_blank');
+      });
+    }
+    
+    if(btnDiscordLive){
+      btnDiscordLive.addEventListener('click', () => {
+        window.open(DISCORD_URL, '_blank');
+      });
+    }
+
+    // Modal controls
+    btnClose1.addEventListener('click', () => modal.classList.add('hidden'));
+    btnClose2.addEventListener('click', () => modal.classList.add('hidden'));
+    btnPrint.addEventListener('click', () => window.print());
+
+    // Close modal when clicking backdrop
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+      }
+    });
+
+    // Countdown timer
+    setInterval(() => {
+      const now = Date.now();
+      let d = Math.max(target - now, 0);
+      const days = Math.floor(d / (1000*60*60*24)); d -= days*24*60*60*1000;
+      const hrs  = Math.floor(d / (1000*60*60));    d -= hrs*60*60*1000;
+      const mins = Math.floor(d / (1000*60));       d -= mins*60*1000;
+      const secs = Math.floor(d / 1000);
+      countEl.textContent = `${days}h ${hrs}j ${mins}m ${secs}d`;
+    }, 1000);
+  </script>
+</body>
+</html>
