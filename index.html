@@ -292,7 +292,7 @@
     const DISCORD_URL = 'https://discord.gg/R5E7pTuU';
     
     // Countdown to event (WIB GMT+7). Target: 2025-09-13T19:30:00+07:00
-    const target = new Date('2025-09-13T19:30:00+07:00').getTime();
+    const target = new Date('2025-09-04T19:30:00+07:00').getTime();
     const countEl = document.getElementById('count');
     const tickerInputs = document.querySelectorAll('[data-qty]');
     const modal = document.getElementById('receipt');
@@ -446,7 +446,7 @@
       const hrs  = Math.floor(d / (1000*60*60));    d -= hrs*60*60*1000;
       const mins = Math.floor(d / (1000*60));       d -= mins*60*1000;
       const secs = Math.floor(d / 1000);
-      countEl.textContent = `${days}h ${hrs}j ${mins}m ${secs}d`;
+      countEl.textContent = `${days} hari ${hrs} jam ${mins} menit ${secs} detik WIB`;
     }, 1000);
   </script>
 </body>
